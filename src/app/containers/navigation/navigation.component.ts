@@ -7,6 +7,7 @@ import { tap } from 'rxjs/operators';
   templateUrl: './navigation.component.html'
 })
 export class NavigationComponent implements OnInit {
+  gap = '1em';
   pages$ = this._pagesService.get().pipe(tap(p => console.log(p)));
 
   constructor(private readonly _pagesService: PagesService) {}

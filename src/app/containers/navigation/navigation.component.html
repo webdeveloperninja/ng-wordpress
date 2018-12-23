@@ -1,6 +1,6 @@
-<div fxLayout="column">
+<div fxLayout="column" [fxLayoutGap]="gap">
   <div *ngFor="let page of pages$ | async">
-    <button>
+    <button mat-raised-button color="primary">
       {{ page.title.rendered }}
     </button>
   </div>
