@@ -1,23 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { PagesService } from 'src/app/services/pages.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { withLatestFrom, map } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'wp-page-content',
   templateUrl: './page-content.component.html'
 })
 export class PageContentComponent implements OnInit {
-  params$ = this._activatedRoute.params;
+  params$ = this.route.params;
 
-  content$ = this._pagesService.get().pipe(
-    withLatestFrom(this.params$),
-    map(([pages, params]: [any[], any]) => {
-      return pages.filter(page => page.slug.includes('dfsfdfsd'))[0].content.rendered;
+  content$ = this.route.params.pipe(
+    withLatestFrom(this._pagesService.get()),
+    map(([params, pages]: [any, any[]]) => {
+      console.log('test', params);
+      return of(pages.filter(page => page.slug.includes(params.slug))[0].content.rendered);
+      // return pages.filter(page => page.slug.includes(params.slug))[0].content.rendered;
     })
   );
 
-  constructor(private readonly _pagesService: PagesService, private readonly _activatedRoute: ActivatedRoute) {}
+  constructor(private readonly _pagesService: PagesService, private readonly route: ActivatedRoute, private readonly _router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      console.log(params);
+    });
+  }
 }

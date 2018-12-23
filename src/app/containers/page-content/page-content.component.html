@@ -1,1 +1,2 @@
-<div [innerHtml]="content$ | async"></div>
+<div [innerHtml]="(content$ | async)?.value">
+</div>
