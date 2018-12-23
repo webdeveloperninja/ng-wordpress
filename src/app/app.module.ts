@@ -9,9 +9,10 @@ import { ThemeModule } from './theme/theme.module';
 import { PostsComponent } from './containers/posts/posts.component';
 
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { NavigationComponent } from './containers/navigation/navigation.component';
 
 @NgModule({
-  declarations: [AppComponent, PostsComponent],
+  declarations: [AppComponent, PostsComponent, NavigationComponent],
   imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, FlexLayoutModule, ThemeModule, HttpClientModule],
   providers: [HttpClient],
   bootstrap: [AppComponent]

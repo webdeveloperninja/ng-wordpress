@@ -1,0 +1,7 @@
+<div fxLayout="column">
+  <div *ngFor="let page of pages$ | async">
+    <button>
+      {{ page.title.rendered }}
+    </button>
+  </div>
+</div>
