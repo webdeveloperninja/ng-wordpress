@@ -11,10 +11,21 @@ import { PostsComponent } from './containers/posts/posts.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NavigationComponent } from './containers/navigation/navigation.component';
 import { PageContentComponent } from './containers/page-content/page-content.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { WordpressInputComponent } from './containers/wordpress-input/wordpress-input.component';
 
 @NgModule({
-  declarations: [AppComponent, PostsComponent, NavigationComponent, PageContentComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, FlexLayoutModule, ThemeModule, HttpClientModule],
+  declarations: [AppComponent, PostsComponent, NavigationComponent, PageContentComponent, WordpressInputComponent],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    FlexLayoutModule,
+    ThemeModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
   providers: [HttpClient],
   bootstrap: [AppComponent]
 })
