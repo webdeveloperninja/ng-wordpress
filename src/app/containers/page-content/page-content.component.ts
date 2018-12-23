@@ -14,9 +14,7 @@ export class PageContentComponent implements OnInit {
   content$ = this.route.params.pipe(
     withLatestFrom(this._pagesService.get()),
     map(([params, pages]: [any, any[]]) => {
-      console.log('test', params);
       return of(pages.filter(page => page.slug.includes(params.slug))[0].content.rendered);
-      // return pages.filter(page => page.slug.includes(params.slug))[0].content.rendered;
     })
   );
 
