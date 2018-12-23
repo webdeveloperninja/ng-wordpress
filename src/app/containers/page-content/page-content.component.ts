@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { of, Subject, BehaviorSubject } from 'rxjs';
-import { map, withLatestFrom, switchMap, mergeMap, tap, filter } from 'rxjs/operators';
+import { BehaviorSubject, of } from 'rxjs';
+import { filter, map, mergeMap } from 'rxjs/operators';
 import { PagesService } from 'src/app/services/pages.service';
 
 @Component({
