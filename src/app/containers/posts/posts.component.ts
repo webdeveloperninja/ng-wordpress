@@ -7,7 +7,7 @@ import { tap } from 'rxjs/operators';
   templateUrl: './posts.component.html'
 })
 export class PostsComponent {
-  posts$ = this._postsService.get().pipe(tap(p => console.log(p)));
+  posts$ = this._postsService.get();
 
   constructor(private readonly _postsService: PostsService) {}
 }
