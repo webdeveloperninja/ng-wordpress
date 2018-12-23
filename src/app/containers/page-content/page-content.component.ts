@@ -33,7 +33,13 @@ export class PageContentComponent implements OnInit {
   }
 
   private findCurrentPage(pages: any[], currentSlug) {
-    return pages.find(page => this.doesPageSlugMatch(page, currentSlug)).content.rendered;
+    const activePage = pages.find(page => this.doesPageSlugMatch(page, currentSlug));
+
+    if (!activePage) {
+      return null;
+    }
+
+    return activePage.content.rendered;
   }
 
   private doesPageSlugMatch(page, slug): boolean {
