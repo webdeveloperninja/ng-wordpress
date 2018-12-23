@@ -1,3 +1,7 @@
-<p>
-  posts works!
-</p>
+<div *ngFor="let post of posts$ | async">
+  <div fxLayout="column">
+    <h3>{{ post?.title?.rendered }}</h3>
+    <div [innerHTML]="post?.content?.rendered">
+    </div>
+  </div>
+</div>

@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { PostsService } from 'src/app/services/posts.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'wp-posts',
-  templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.scss']
+  templateUrl: './posts.component.html'
 })
-export class PostsComponent implements OnInit {
-  constructor() {}
+export class PostsComponent {
+  posts$ = this._postsService.get().pipe(tap(p => console.log(p)));
 
-  ngOnInit() {}
+  constructor(private readonly _postsService: PostsService) {}
 }
