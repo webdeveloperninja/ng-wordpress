@@ -9,7 +9,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class NavigationComponent implements OnInit {
   gap = '1em';
-  pages$ = this.route.params.pipe(switchMap((params: any) => this._pagesService.get(params.wordpressUrl)));
+  wordpressUrl: string;
+
+  pages$ = this.route.params.pipe(
+    switchMap((params: any) => {
+      this.wordpressUrl = params.wordpressUrl;
+
+      return this._pagesService.get(this.wordpressUrl);
+    })
+  );
 
   constructor(private readonly _pagesService: PagesService, private readonly route: ActivatedRoute) {}
 
