@@ -1,4 +1,5 @@
-<h2>Posts</h2>
+<wp-navigation></wp-navigation>
+
 <div *ngFor="let post of posts$ | async">
   <div fxLayout="column">
     <h3>{{ post.title.rendered }}</h3>

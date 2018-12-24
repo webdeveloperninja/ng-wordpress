@@ -4,7 +4,10 @@
       {{ page.title.rendered }}
     </button>
   </div>
-  <button [routerLink]="['/site']">
+  <button mat-raised-button color="primary" [routerLink]="['/site', wordpressUrl, 'posts']">
+    Posts
+  </button>
+  <button mat-raised-button color="accent" [routerLink]="['/site']">
     Clear
   </button>
 </div>

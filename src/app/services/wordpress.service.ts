@@ -15,8 +15,8 @@ export class WordpressService {
     this.router.navigate(['site', url]);
   }
 
-  getPostsApiUrl(): string {
-    return `${this.wordpressUrl$.value}/wp-json/wp/v2/posts`;
+  getPostsApiUrl(baseUrl: string): string {
+    return `${baseUrl}/wp-json/wp/v2/posts`;
   }
 
   getPagesApiUrl(baseUrl: string): string {

@@ -8,8 +8,8 @@ import { WordpressService } from './wordpress.service';
 export class PostsService {
   constructor(private readonly _httpClient: HttpClient, private readonly _wordpressService: WordpressService) {}
 
-  get() {
-    const url = this._wordpressService.getPostsApiUrl();
+  get(baseUrl: string) {
+    const url = this._wordpressService.getPostsApiUrl(baseUrl);
 
     return this._httpClient.get(url);
   }
