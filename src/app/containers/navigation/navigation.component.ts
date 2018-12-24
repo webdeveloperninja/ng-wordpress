@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PagesService } from 'src/app/services/pages.service';
-import { tap } from 'rxjs/operators';
+import { tap, switchMap, map } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'wp-navigation',
@@ -8,9 +9,9 @@ import { tap } from 'rxjs/operators';
 })
 export class NavigationComponent implements OnInit {
   gap = '1em';
-  pages$ = this._pagesService.get();
+  pages$ = this.route.params.pipe(switchMap((params: any) => this._pagesService.get(params.wordpressUrl)));
 
-  constructor(private readonly _pagesService: PagesService) {}
+  constructor(private readonly _pagesService: PagesService, private readonly route: ActivatedRoute) {}
 
   ngOnInit() {}
 }

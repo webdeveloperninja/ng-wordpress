@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, of } from 'rxjs';
-import { filter, map, mergeMap } from 'rxjs/operators';
+import { filter, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { PagesService } from 'src/app/services/pages.service';
 
 @Component({
@@ -13,8 +13,9 @@ export class PageContentComponent implements OnInit {
 
   content$ = this.currentSlug$.pipe(
     filter(slug => !!slug),
-    mergeMap(slug =>
-      this._pagesService.get().pipe(
+    withLatestFrom(this.route.params),
+    mergeMap(([slug, params]: [any, any]) =>
+      this._pagesService.get(params.wordpressUrl).pipe(
         map((pages: any[]) => {
           return of(this.findCurrentPage(pages, slug));
         })
