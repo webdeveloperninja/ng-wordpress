@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { filter, map, mergeMap, switchMap, withLatestFrom } from 'rxjs/operators';
+import { filter, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { Page } from 'src/app/contracts/page';
 import { AuthorsService } from 'src/app/services/authors.service';
 import { PagesService } from 'src/app/services/pages.service';
@@ -26,7 +26,7 @@ export class PageContentComponent implements OnInit {
   );
 
   authors$ = this.activePage$.pipe(
-    switchMap(page => {
+    mergeMap(page => {
       const authorLinks = page._links.author;
 
       return this._authorsService.get(authorLinks);

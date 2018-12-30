@@ -27,8 +27,8 @@ export interface Links {
   self: About[];
   collection: About[];
   about: About[];
-  author: Author[];
-  replies: Author[];
+  author: AuthorLinks[];
+  replies: AuthorLinks[];
   'version-history': VersionHistory[];
   'predecessor-version'?: PredecessorVersion[];
   'wp:attachment': About[];
@@ -39,7 +39,7 @@ export interface About {
   href: string;
 }
 
-export interface Author {
+export interface AuthorLinks {
   embeddable: boolean;
   href: string;
 }
