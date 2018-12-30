@@ -15,9 +15,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { WordpressInputComponent } from './containers/wordpress-input/wordpress-input.component';
 import { ContentComponent } from './components/content/content.component';
 import { CreatedAtComponent } from './components/created-at/created-at.component';
+import { AuthorsComponent } from './components/authors/authors.component';
 
 @NgModule({
-  declarations: [AppComponent, PostsComponent, NavigationComponent, PageContentComponent, WordpressInputComponent, ContentComponent, CreatedAtComponent],
+  declarations: [AppComponent, PostsComponent, NavigationComponent, PageContentComponent, WordpressInputComponent, ContentComponent, CreatedAtComponent, AuthorsComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

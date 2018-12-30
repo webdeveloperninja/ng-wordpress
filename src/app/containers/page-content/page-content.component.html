@@ -1,8 +1,9 @@
 <wp-navigation></wp-navigation>
 
 <ng-container *ngIf="activePage$ | async as page">
-  <div fxLayout="row">
+  <div fxLayout="row" fxLayoutAlign="space-between">
     <wp-created-at [date]="page.date"></wp-created-at>
+    <wp-authors [authors]="authors$ | async"></wp-authors>
   </div>
 
   <wp-content [content]="page.content.rendered"></wp-content>

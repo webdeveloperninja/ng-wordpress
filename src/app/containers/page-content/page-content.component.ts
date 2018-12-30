@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, ParamMap, Params } from '@angular/router';
-import { BehaviorSubject, of } from 'rxjs';
-import { filter, map, mergeMap, withLatestFrom } from 'rxjs/operators';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { filter, map, mergeMap, switchMap, withLatestFrom } from 'rxjs/operators';
+import { Page } from 'src/app/contracts/page';
+import { AuthorsService } from 'src/app/services/authors.service';
 import { PagesService } from 'src/app/services/pages.service';
-import { Page, Content } from 'src/app/contracts/page';
 
 @Component({
   selector: 'wp-page-content',
@@ -24,7 +25,20 @@ export class PageContentComponent implements OnInit {
     )
   );
 
-  constructor(private readonly _pagesService: PagesService, private readonly route: ActivatedRoute, private readonly _router: Router) {}
+  authors$ = this.activePage$.pipe(
+    switchMap(page => {
+      const authorLinks = page._links.author;
+
+      return this._authorsService.get(authorLinks);
+    })
+  );
+
+  constructor(
+    private readonly _pagesService: PagesService,
+    private readonly route: ActivatedRoute,
+    private readonly _router: Router,
+    private readonly _authorsService: AuthorsService
+  ) {}
 
   ngOnInit() {
     this.setInitialPageSlug();
