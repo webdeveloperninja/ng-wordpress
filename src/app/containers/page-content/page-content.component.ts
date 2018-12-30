@@ -29,12 +29,12 @@ export class PageContentComponent implements OnInit {
   ngOnInit() {
     this.setInitialPageSlug();
 
-    this.route.params.subscribe(par => {
-      this.setRouteSlug(par.slug);
+    this.route.params.subscribe(params => {
+      this.setRouteSlug(params.slug);
     });
   }
 
-  private getContent(pages: Page[], currentSlug): string {
+  private getContent(pages: Page[], currentSlug: string): string {
     const activePage = pages.find(page => this.doesPageSlugMatch(page, currentSlug));
 
     if (!activePage) {
