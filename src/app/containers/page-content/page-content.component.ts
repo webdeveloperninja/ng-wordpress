@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, ParamMap, Params } from '@angular/router';
 import { BehaviorSubject, of } from 'rxjs';
 import { filter, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { PagesService } from 'src/app/services/pages.service';
-import { Page } from 'src/app/contracts/page';
+import { Page, Content } from 'src/app/contracts/page';
 
 @Component({
   selector: 'wp-page-content',
@@ -12,13 +12,13 @@ import { Page } from 'src/app/contracts/page';
 export class PageContentComponent implements OnInit {
   currentSlug$ = new BehaviorSubject('');
 
-  content$ = this.currentSlug$.pipe(
+  activePage$ = this.currentSlug$.pipe(
     filter(currentSlug => !!currentSlug),
     withLatestFrom(this.route.params),
     mergeMap(([slug, params]: [string, Params]) =>
       this._pagesService.get(params.wordpressUrl).pipe(
         map(pages => {
-          return of(this.getContent(pages, slug));
+          return this.getActivePage(pages, slug);
         })
       )
     )
@@ -34,14 +34,14 @@ export class PageContentComponent implements OnInit {
     });
   }
 
-  private getContent(pages: Page[], currentSlug: string): string {
+  private getActivePage(pages: Page[], currentSlug: string): Page {
     const activePage = pages.find(page => this.doesPageSlugMatch(page, currentSlug));
 
     if (!activePage) {
       return null;
     }
 
-    return activePage.content.rendered;
+    return activePage;
   }
 
   private doesPageSlugMatch(page: Page, slug: string): boolean {
