@@ -2,7 +2,7 @@
 
 <ng-container *ngIf="activePage$ | async as page">
   <div fxLayout="row">
-    <p>Created: {{ page.date | date }}</p>
+    <wp-created-at [date]="page.date"></wp-created-at>
   </div>
 
   <wp-content [content]="page.content.rendered"></wp-content>
