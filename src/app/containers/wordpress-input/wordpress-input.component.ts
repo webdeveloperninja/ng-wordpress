@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { WordpressService } from 'src/app/services/wordpress.service';
 
@@ -6,24 +6,22 @@ import { WordpressService } from 'src/app/services/wordpress.service';
   selector: 'wp-wordpress-input',
   templateUrl: './wordpress-input.component.html'
 })
-export class WordpressInputComponent implements OnInit {
+export class WordpressInputComponent {
   form: FormGroup;
 
   constructor(private readonly _formBuilder: FormBuilder, private readonly _wordpressService: WordpressService) {
     this.createForm();
   }
 
-  private createForm() {
+  private createForm(): void {
     this.form = this._formBuilder.group({
       wordpressUrl: ['', Validators.required]
     });
   }
 
-  submit() {
+  submit(): void {
     const url = this.form.value.wordpressUrl;
 
     this._wordpressService.updateSite(url);
   }
-
-  ngOnInit() {}
 }

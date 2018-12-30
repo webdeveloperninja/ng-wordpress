@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, of } from 'rxjs';
 import { filter, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { PagesService } from 'src/app/services/pages.service';
+import { Page } from 'src/app/contracts/page';
 
 @Component({
   selector: 'wp-page-content',
@@ -16,7 +17,7 @@ export class PageContentComponent implements OnInit {
     withLatestFrom(this.route.params),
     mergeMap(([slug, params]: [any, any]) =>
       this._pagesService.get(params.wordpressUrl).pipe(
-        map((pages: any[]) => {
+        map(pages => {
           return of(this.findCurrentPage(pages, slug));
         })
       )
@@ -33,7 +34,7 @@ export class PageContentComponent implements OnInit {
     });
   }
 
-  private findCurrentPage(pages: any[], currentSlug) {
+  private findCurrentPage(pages: Page[], currentSlug): string {
     const activePage = pages.find(page => this.doesPageSlugMatch(page, currentSlug));
 
     if (!activePage) {
@@ -43,16 +44,17 @@ export class PageContentComponent implements OnInit {
     return activePage.content.rendered;
   }
 
-  private doesPageSlugMatch(page, slug): boolean {
+  private doesPageSlugMatch(page: Page, slug: string): boolean {
     return page.slug.includes(slug);
   }
 
-  private setRouteSlug(slug) {
+  private setRouteSlug(slug: string): void {
     this.currentSlug$.next(slug);
   }
 
-  private setInitialPageSlug() {
+  private setInitialPageSlug(): void {
     const params = this.route.snapshot.params;
+
     this.setRouteSlug(params.slug);
   }
 }

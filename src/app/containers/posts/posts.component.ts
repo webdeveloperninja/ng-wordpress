@@ -17,5 +17,6 @@ export class PostsComponent {
       return this._postsService.get(this.wordpressUrl);
     })
   );
+
   constructor(private readonly _postsService: PostsService, private readonly route: ActivatedRoute) {}
 }

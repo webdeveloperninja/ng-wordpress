@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { mergeMap } from 'rxjs/operators';
 import { PagesService } from 'src/app/services/pages.service';
@@ -7,7 +7,7 @@ import { PagesService } from 'src/app/services/pages.service';
   selector: 'wp-navigation',
   templateUrl: './navigation.component.html'
 })
-export class NavigationComponent implements OnInit {
+export class NavigationComponent {
   gap = '1em';
   wordpressUrl: string;
 
@@ -20,6 +20,4 @@ export class NavigationComponent implements OnInit {
   );
 
   constructor(private readonly _pagesService: PagesService, private readonly route: ActivatedRoute) {}
-
-  ngOnInit() {}
 }
