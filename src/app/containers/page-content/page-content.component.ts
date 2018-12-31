@@ -13,7 +13,7 @@ import { Author } from 'src/app/contracts/author';
 })
 export class PageContentComponent {
   pages$ = this.route.params.pipe(mergeMap(_ => this.getPages()));
-  activePage$ = this.pages$.pipe(map(this.getActivePage.bind(this)));
+  activePage$ = this.pages$.pipe(map(this.findActivePage.bind(this)));
   authors$ = this.activePage$.pipe(mergeMap(this.getAuthors.bind(this)));
 
   constructor(
@@ -28,7 +28,7 @@ export class PageContentComponent {
     return this._pagesService.get(wordpressUrl);
   }
 
-  private getActivePage(pages: Page[]): Page {
+  private findActivePage(pages: Page[]): Page {
     const currentSlug = this.route.snapshot.params.slug;
 
     return pages.find(page => this.doesPageSlugMatch(page, currentSlug));
