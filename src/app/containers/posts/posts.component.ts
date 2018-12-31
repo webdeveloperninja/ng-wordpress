@@ -1,22 +1,18 @@
 import { Component } from '@angular/core';
-import { PostsService } from 'src/app/services/posts.service';
-import { tap, mergeMap } from 'rxjs/operators';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Post } from 'src/app/contracts/post';
+import { mergeMap, tap } from 'rxjs/operators';
+import { Post } from 'src/app/angular-wordpress/contracts/post';
+import { PostsService } from 'src/app/angular-wordpress/services/posts.service';
 
 @Component({
   selector: 'wp-posts',
   templateUrl: './posts.component.html'
 })
 export class PostsComponent {
-  posts$ = this._route.params.pipe(mergeMap(this.getPosts.bind(this)));
+  posts$ = this._postsService.get$();
 
-  constructor(private readonly _postsService: PostsService, private readonly _route: ActivatedRoute) {}
-
-  private getPosts(params: Params): Observable<Post[]> {
-    const wordpressUrl = params.wordpressUrl;
-
-    return this._postsService.get(wordpressUrl);
+  constructor(private readonly _postsService: PostsService) {
+    console.log('constructor');
   }
 }

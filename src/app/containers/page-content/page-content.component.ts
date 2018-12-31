@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
-import { Author } from 'src/app/contracts/author';
-import { Page } from 'src/app/contracts/page';
-import { AuthorsService } from 'src/app/services/authors.service';
-import { PagesService } from 'src/app/services/pages.service';
+import { Author } from 'src/app/angular-wordpress/contracts/author';
+import { Page } from 'src/app/angular-wordpress/contracts/page';
+import { AuthorsService } from 'src/app/angular-wordpress/services/authors.service';
+import { PagesService } from 'src/app/angular-wordpress/services/pages.service';
 
 @Component({
   selector: 'wp-page-content',
@@ -23,9 +23,7 @@ export class PageContentComponent {
   ) {}
 
   private getPages(): Observable<Page[]> {
-    const wordpressUrl = this._route.snapshot.params.wordpressUrl;
-
-    return this._pagesService.get(wordpressUrl);
+    return this._pagesService.get$();
   }
 
   private findActivePage(pages: Page[]): Page {
@@ -37,7 +35,7 @@ export class PageContentComponent {
   private getAuthors(page: Page): Observable<Author[]> {
     const authorLinks = page._links.author;
 
-    return this._authorsService.get(authorLinks);
+    return this._authorsService.get$(authorLinks);
   }
 
   private doesPageSlugMatch(page: Page, slug: string): boolean {

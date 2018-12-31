@@ -1,23 +1,12 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { mergeMap } from 'rxjs/operators';
-import { PagesService } from 'src/app/services/pages.service';
+import { PagesService } from 'src/app/angular-wordpress/services/pages.service';
 
 @Component({
   selector: 'wp-navigation',
   templateUrl: './navigation.component.html'
 })
 export class NavigationComponent {
-  gap = '1em';
-  wordpressUrl: string;
+  pages$ = this._pagesService.get$();
 
-  pages$ = this._route.params.pipe(
-    mergeMap((params: any) => {
-      this.wordpressUrl = params.wordpressUrl;
-
-      return this._pagesService.get(this.wordpressUrl);
-    })
-  );
-
-  constructor(private readonly _pagesService: PagesService, private readonly _route: ActivatedRoute) {}
+  constructor(private readonly _pagesService: PagesService) {}
 }

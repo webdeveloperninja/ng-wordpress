@@ -12,7 +12,7 @@ import { Author } from '../contracts/author';
 export class AuthorsService {
   constructor(private readonly _httpClient: HttpClient, private readonly _wordpressService: WordpressService) {}
 
-  get(authorLinks: AuthorLinks[]): Observable<Author[]> {
+  get$(authorLinks: AuthorLinks[]): Observable<Author[]> {
     return this.getAuthors(authorLinks);
   }
 

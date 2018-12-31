@@ -1,24 +1,30 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ThemeModule } from './theme/theme.module';
-import { PostsComponent } from './containers/posts/posts.component';
-
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { NavigationComponent } from './containers/navigation/navigation.component';
-import { PageContentComponent } from './containers/page-content/page-content.component';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { WordpressInputComponent } from './containers/wordpress-input/wordpress-input.component';
+import { AuthorsComponent } from './components/authors/authors.component';
 import { ContentComponent } from './components/content/content.component';
 import { CreatedAtComponent } from './components/created-at/created-at.component';
-import { AuthorsComponent } from './components/authors/authors.component';
+import { NavigationComponent } from './containers/navigation/navigation.component';
+import { PageContentComponent } from './containers/page-content/page-content.component';
+import { PostsComponent } from './containers/posts/posts.component';
+import { ThemeModule } from './theme/theme.module';
 
 @NgModule({
-  declarations: [AppComponent, PostsComponent, NavigationComponent, PageContentComponent, WordpressInputComponent, ContentComponent, CreatedAtComponent, AuthorsComponent],
+  declarations: [
+    AppComponent,
+    PostsComponent,
+    NavigationComponent,
+    PageContentComponent,
+    ContentComponent,
+    CreatedAtComponent,
+    AuthorsComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
