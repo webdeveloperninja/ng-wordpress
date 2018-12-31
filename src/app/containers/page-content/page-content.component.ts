@@ -16,10 +16,10 @@ export class PageContentComponent implements OnInit {
   activePage$ = this.currentSlug$.pipe(
     filter(currentSlug => !!currentSlug),
     withLatestFrom(this.route.params),
-    mergeMap(([slug, params]: [string, Params]) =>
+    mergeMap(([currentSlug, params]) =>
       this._pagesService.get(params.wordpressUrl).pipe(
         map(pages => {
-          return this.getActivePage(pages, slug);
+          return this.getActivePage(pages, currentSlug);
         })
       )
     )
