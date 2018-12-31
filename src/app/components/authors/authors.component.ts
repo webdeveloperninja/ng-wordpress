@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Author } from 'src/app/angular-wordpress/contracts/author';
+import { Author } from 'projects/ng-wordpress/src/lib/contracts/author';
 
 @Component({
   selector: 'wp-authors',
