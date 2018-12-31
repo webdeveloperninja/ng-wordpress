@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
-import { Author } from 'src/app/angular-wordpress/contracts/author';
-import { Page } from 'src/app/angular-wordpress/contracts/page';
-import { AuthorsService } from 'src/app/angular-wordpress/services/authors.service';
-import { PagesService } from 'src/app/angular-wordpress/services/pages.service';
+import { PagesService } from 'projects/ng-wordpress/src/lib/services/pages.service';
+import { AuthorsService } from 'projects/ng-wordpress/src/lib/services/authors.service';
+import { Page } from 'projects/ng-wordpress/src/lib/contracts/page';
+import { Author } from 'projects/ng-wordpress/src/lib/contracts/author';
 
 @Component({
   selector: 'wp-page-content',

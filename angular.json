@@ -33,10 +33,12 @@
           },
           "configurations": {
             "production": {
-              "fileReplacements": [{
-                "replace": "src/environments/environment.ts",
-                "with": "src/environments/environment.prod.ts"
-              }],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -46,11 +48,13 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "budgets": [{
-                "type": "initial",
-                "maximumWarning": "2mb",
-                "maximumError": "5mb"
-              }]
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
             }
           }
         },
@@ -123,6 +127,41 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "NgWordpress": {
+      "root": "projects/ng-wordpress",
+      "sourceRoot": "projects/ng-wordpress/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-wordpress/tsconfig.lib.json",
+            "project": "projects/ng-wordpress/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-wordpress/src/test.ts",
+            "tsConfig": "projects/ng-wordpress/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-wordpress/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-wordpress/tsconfig.lib.json",
+              "projects/ng-wordpress/tsconfig.spec.json"
+            ],
             "exclude": [
               "**/node_modules/**"
             ]

@@ -14,7 +14,7 @@ import { NavigationComponent } from './containers/navigation/navigation.componen
 import { PageContentComponent } from './containers/page-content/page-content.component';
 import { PostsComponent } from './containers/posts/posts.component';
 import { ThemeModule } from './theme/theme.module';
-import { AngularWordpressModule } from './angular-wordpress/angular-wordpress.module';
+import { NgWordpressModule } from 'projects/ng-wordpress/src/lib/ng-wordpress.module';
 
 const wordpressConfig: any = { baseUrl: 'http://localhost:8080/test/WordPress/' };
 
@@ -29,7 +29,7 @@ const wordpressConfig: any = { baseUrl: 'http://localhost:8080/test/WordPress/' 
     AuthorsComponent
   ],
   imports: [
-    AngularWordpressModule.forRoot(wordpressConfig),
+    NgWordpressModule.forRoot(wordpressConfig),
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,

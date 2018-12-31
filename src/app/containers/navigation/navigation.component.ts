@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PagesService } from 'src/app/angular-wordpress/services/pages.service';
+import { PagesService } from 'projects/ng-wordpress/src/lib/services/pages.service';
 
 @Component({
   selector: 'wp-navigation',

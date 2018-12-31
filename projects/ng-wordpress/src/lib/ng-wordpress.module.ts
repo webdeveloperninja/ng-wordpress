@@ -10,10 +10,10 @@ export class WordpressConfig {
   declarations: [],
   imports: [CommonModule]
 })
-export class AngularWordpressModule {
+export class NgWordpressModule {
   static forRoot(config: WordpressConfig): ModuleWithProviders {
     return {
-      ngModule: AngularWordpressModule,
+      ngModule: NgWordpressModule,
       providers: [{ provide: WordpressConfig, useValue: config }]
     };
   }

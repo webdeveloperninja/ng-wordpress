@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { mergeMap, tap } from 'rxjs/operators';
-import { Post } from 'src/app/angular-wordpress/contracts/post';
-import { PostsService } from 'src/app/angular-wordpress/services/posts.service';
+import { PostsService } from 'projects/ng-wordpress/src/lib/services/posts.service';
 
 @Component({
   selector: 'wp-posts',

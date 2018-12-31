@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { WordpressConfig } from '../angular-wordpress.module';
+import { WordpressConfig } from '../ng-wordpress.module';
 
 export const baseUrl = 'http://localhost:8080/test/WordPress/';
 
