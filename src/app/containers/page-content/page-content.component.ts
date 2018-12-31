@@ -12,24 +12,24 @@ import { PagesService } from 'src/app/services/pages.service';
   templateUrl: './page-content.component.html'
 })
 export class PageContentComponent {
-  pages$ = this.route.params.pipe(mergeMap(_ => this.getPages()));
+  pages$ = this._route.params.pipe(mergeMap(_ => this.getPages()));
   activePage$ = this.pages$.pipe(map(this.findActivePage.bind(this)));
   authors$ = this.activePage$.pipe(mergeMap(this.getAuthors.bind(this)));
 
   constructor(
     private readonly _pagesService: PagesService,
-    private readonly route: ActivatedRoute,
+    private readonly _route: ActivatedRoute,
     private readonly _authorsService: AuthorsService
   ) {}
 
   private getPages(): Observable<Page[]> {
-    const wordpressUrl = this.route.snapshot.params.wordpressUrl;
+    const wordpressUrl = this._route.snapshot.params.wordpressUrl;
 
     return this._pagesService.get(wordpressUrl);
   }
 
   private findActivePage(pages: Page[]): Page {
-    const currentSlug = this.route.snapshot.params.slug;
+    const currentSlug = this._route.snapshot.params.slug;
 
     return pages.find(page => this.doesPageSlugMatch(page, currentSlug));
   }

@@ -10,9 +10,9 @@ import { Post } from 'src/app/contracts/post';
   templateUrl: './posts.component.html'
 })
 export class PostsComponent {
-  posts$ = this.route.params.pipe(mergeMap(this.getPosts.bind(this)));
+  posts$ = this._route.params.pipe(mergeMap(this.getPosts.bind(this)));
 
-  constructor(private readonly _postsService: PostsService, private readonly route: ActivatedRoute) {}
+  constructor(private readonly _postsService: PostsService, private readonly _route: ActivatedRoute) {}
 
   private getPosts(params: Params): Observable<Post[]> {
     const wordpressUrl = params.wordpressUrl;

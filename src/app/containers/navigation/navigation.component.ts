@@ -11,7 +11,7 @@ export class NavigationComponent {
   gap = '1em';
   wordpressUrl: string;
 
-  pages$ = this.route.params.pipe(
+  pages$ = this._route.params.pipe(
     mergeMap((params: any) => {
       this.wordpressUrl = params.wordpressUrl;
 
@@ -19,5 +19,5 @@ export class NavigationComponent {
     })
   );
 
-  constructor(private readonly _pagesService: PagesService, private readonly route: ActivatedRoute) {}
+  constructor(private readonly _pagesService: PagesService, private readonly _route: ActivatedRoute) {}
 }
