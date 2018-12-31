@@ -11,21 +11,9 @@ import { Author } from 'src/app/contracts/author';
   selector: 'wp-page-content',
   templateUrl: './page-content.component.html'
 })
-export class PageContentComponent implements OnInit {
-  currentSlug$ = new BehaviorSubject('');
-
-  activePage$ = this.currentSlug$.pipe(
-    filter(currentSlug => !!currentSlug),
-    withLatestFrom(this.route.params),
-    mergeMap(([slug, params]: [string, Params]) =>
-      this._pagesService.get(params.wordpressUrl).pipe(
-        map(pages => {
-          return this.getActivePage(pages, slug);
-        })
-      )
-    )
-  );
-
+export class PageContentComponent {
+  pages$ = this.route.params.pipe(mergeMap(_ => this.getPages()));
+  activePage$ = this.pages$.pipe(map(this.getActivePage.bind(this)));
   authors$ = this.activePage$.pipe(mergeMap(this.getAuthors.bind(this)));
 
   constructor(
@@ -34,12 +22,16 @@ export class PageContentComponent implements OnInit {
     private readonly _authorsService: AuthorsService
   ) {}
 
-  ngOnInit() {
-    this.setInitialPageSlug();
+  private getPages(): Observable<Page[]> {
+    const wordpressUrl = this.route.snapshot.params.wordpressUrl;
 
-    this.route.params.subscribe(params => {
-      this.setRouteSlug(params.slug);
-    });
+    return this._pagesService.get(wordpressUrl);
+  }
+
+  private getActivePage(pages: Page[]): Page {
+    const currentSlug = this.route.snapshot.params.slug;
+
+    return pages.find(page => this.doesPageSlugMatch(page, currentSlug));
   }
 
   private getAuthors(page: Page): Observable<Author[]> {
@@ -48,27 +40,7 @@ export class PageContentComponent implements OnInit {
     return this._authorsService.get(authorLinks);
   }
 
-  private getActivePage(pages: Page[], currentSlug: string): Page {
-    const activePage = pages.find(page => this.doesPageSlugMatch(page, currentSlug));
-
-    if (!activePage) {
-      return null;
-    }
-
-    return activePage;
-  }
-
   private doesPageSlugMatch(page: Page, slug: string): boolean {
     return page.slug.includes(slug);
-  }
-
-  private setRouteSlug(slug: string): void {
-    this.currentSlug$.next(slug);
-  }
-
-  private setInitialPageSlug(): void {
-    const params = this.route.snapshot.params;
-
-    this.setRouteSlug(params.slug);
   }
 }
