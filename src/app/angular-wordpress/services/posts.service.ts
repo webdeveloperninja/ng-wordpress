@@ -13,7 +13,6 @@ export class PostsService {
   get$(): Observable<Post[]> {
     const url = this._wordpressService.getPostsApiUrl();
 
-    console.log('get posts', url);
     return this._httpClient.get<Post[]>(url);
   }
 }
