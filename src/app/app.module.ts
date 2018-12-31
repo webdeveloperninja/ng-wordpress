@@ -1,5 +1,5 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,6 +14,9 @@ import { NavigationComponent } from './containers/navigation/navigation.componen
 import { PageContentComponent } from './containers/page-content/page-content.component';
 import { PostsComponent } from './containers/posts/posts.component';
 import { ThemeModule } from './theme/theme.module';
+import { AngularWordpressModule } from './angular-wordpress/angular-wordpress.module';
+
+const wordpressConfig: any = { baseUrl: 'http://localhost:8080/test/WordPress/' };
 
 @NgModule({
   declarations: [
@@ -26,6 +29,7 @@ import { ThemeModule } from './theme/theme.module';
     AuthorsComponent
   ],
   imports: [
+    AngularWordpressModule.forRoot(wordpressConfig),
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
