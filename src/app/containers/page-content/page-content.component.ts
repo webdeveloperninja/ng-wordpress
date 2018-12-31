@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, map, mergeMap, withLatestFrom } from 'rxjs/operators';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map, mergeMap } from 'rxjs/operators';
+import { Author } from 'src/app/contracts/author';
 import { Page } from 'src/app/contracts/page';
 import { AuthorsService } from 'src/app/services/authors.service';
 import { PagesService } from 'src/app/services/pages.service';
-import { Author } from 'src/app/contracts/author';
 
 @Component({
   selector: 'wp-page-content',
